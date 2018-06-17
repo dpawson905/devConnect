@@ -239,6 +239,12 @@ router.delete(
           .map(item => item.id)
           .indexOf(req.params.exp_id);
 
+        if (removeIndex === -1) {
+          return res.status(404).json({
+            error: "There is no experience with this ID"
+          });
+        }
+
         // Splice out of array
         profile.experience.splice(removeIndex, 1);
 
@@ -262,6 +268,12 @@ router.delete(
         const removeIndex = profile.education
           .map(item => item.id)
           .indexOf(req.params.edu_id);
+
+        if (removeIndex === -1) {
+          return res.status(404).json({
+            error: "There is no education with this ID"
+          });
+        }
 
         // Splice out of array
         profile.education.splice(removeIndex, 1);
